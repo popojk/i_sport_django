@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "Ss6450065",
         "OPTIONS": {
-            
+
         }
     }
 }

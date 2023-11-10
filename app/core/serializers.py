@@ -47,6 +47,16 @@ class UserLoginSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
     
+class UserRegisterSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'email', 'password')
+
+    def create(self, validated_data):
+        """create and return a user with encrypted password."""
+        return get_user_model().objects.create_user(**validated_data)
+    
 class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

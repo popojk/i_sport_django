@@ -20,7 +20,7 @@ from rest_framework import routers, permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from core.views import LoginView, LogoutView, UserDetailsView, PasswordChangeView
+from core.views import LoginView, LogoutView, UserDetailsView, RegisterView,PasswordChangeView
 
 # swagger
 schema_view = get_schema_view(
@@ -37,10 +37,11 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("api/admin/", admin.site.urls),
     # dj_rest_auth
     path('api/v1/login/', LoginView.as_view(), name='rest_login'),
     path('api/v1/logout/', LogoutView.as_view(), name='rest_logout'),
+    path('api/v1/register', RegisterView.as_view(), name='rest_register'),
     path('api/v1/user', UserDetailsView.as_view(), name='rest_user_details'),
     path('api/v1/password/change/', PasswordChangeView.as_view(), 
          name='rest_password_change'),

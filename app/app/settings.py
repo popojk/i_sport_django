@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "core",
     "dj_rest_auth",
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +94,7 @@ REST_AUTH = {
     # 'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
     'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
 
-    # 'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+    # 'REGISTER_SERIALIZER': 'core.serializers.UserRegisterSerializer',
     # 'REGISTER_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
 
     'TOKEN_MODEL': 'rest_framework.authtoken.models.Token',

@@ -4,13 +4,26 @@ from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 
 from dj_rest_auth import views as dj_views
 from dj_rest_auth.serializers import TokenSerializer
 from drf_yasg.utils import swagger_auto_schema
 
-from core.serializers import UserLoginSerializer, UserDetailsSerializer
+from core.serializers import UserLoginSerializer, UserDetailsSerializer, UserRegisterSerializer
+
+class RegisterView(generics.CreateAPIView):
+    """User register view"""
+    permission_classes = (AllowAny,)
+    serializer_class = UserRegisterSerializer
+
+    @swagger_auto_schema(operation_description="create user account",
+                         request_body=UserRegisterSerializer,
+                         response={200: UserDetailsSerializer(many=False)},
+                         security=[],
+                         )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, args, kwargs)
 
 class LoginView(dj_views.LoginView):
     permission_classes = (AllowAny,)
@@ -52,7 +65,7 @@ class LogoutView(APIView):
 class UserDetailsView(dj_views.UserDetailsView):
     @swagger_auto_schema(operation_description="Get user detail data.",
                          response={200: UserDetailsSerializer(many=False)})
-    def put(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         return super().get(request, args, kwargs)
     
     @swagger_auto_schema(operation_description="Update user data.",
